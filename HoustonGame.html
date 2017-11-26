@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <title>Daniel Beaver II</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Unity Projects.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <div class="container"> 
+  <header> 
+    <nav>
+      <ul>
+       <li><a href="javascript:history.back()">BACK</a></li>
+        <li><a href="http://Dimencia.com">HOME</a></li>
+        <li> <a href="mailto:Dimencia@gmail.com">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+   <h3>Controls</h3>
+        <ul>
+        	<li>WASD - Movement, Pitch, or Roll</li>
+        	<li>EQ - Yaw when controlling rocket</li>
+        	<li>F - Exit pilot's seat</li>
+        	<li>Mouse1 - Interact</li>
+        	<li>Space - Jump (when not in pilot's seat)</li>
+        </ul>
+    <div class="webgl-content">
+      <div id="gameContainer"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Houston</div>
+      </div>
+    </div>
+    
+  </body>
+	</div>
+</html>

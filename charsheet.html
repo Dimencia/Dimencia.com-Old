@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Beaver II</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/Scripts/styles/default.css">
+<script src="/Scripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Unity Projects.json", {onProgress: UnityProgress});
+    </script>
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header> 
+    <nav>
+      <ul>
+        <li><a href="http://Dimencia.com">HOME</a></li>
+        <li> <a href="mailto:Dimencia@gmail.com">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section --> 
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2 class="hidden">About</h2>
+    
+    <section class="hero" id="hero">
+      <h2 class="hero_header">Maptool<span class="light"> Character Sheet</span></h2>
+      <p class="tagline">It's kinda neat</p>
+    </section>
+    
+    <hr>
+    <div class="shaded" style="padding-bottom: 10px;">This is a character sheet I made for use with Pathfinder rules, using Maptool's macro language.  This was interesting because the language is very limited; for example, it only allows up to two nested code brackets, which severely limits its usability.
+    <p>Despite this, I managed to get this to display for a player as a frame in their window, with links to roll for saves or abilities, ways to edit them, and the options to apply 'buffs' for common spells.  This edits each Maptool Pog directly to store and retrieve information, so it can be used on any Pog with minimal to no setup.  Before this, our procedure involved each player creating their own custom macros which would take time and would often result in problems - this solves those problems by using generic functions that can work for any given pog, and asking for user input when data is not found.</p>
+    <p>In addition to the code itself, all display elements such as the frame us HTML and CSS, heavily formatted for readability.</p>
+    <p>I also managed to simplify combat by allowing a player to input data about their 'attacks', which can then be performed on the fly by selecting the tokens to attack.  This displays the token's AC (how hard they are to hit), resistances, and immunities.  Since most attack procedures involve multiple attacks, the player can then queue up attacks on targets one at a time until they've used up all of their attacks.  This is shown to them in an active window where they can edit some of the values - in case there are variables that the sheet is not accounting for.  Once they are finished they submit this, which is then sent to the GM or Game Master for approval.  The GM sees both the original values and any modifications that were made, and is free to make any further modifications (as GameMaster, the ability to change results without alerting others is invaluable).  Once this is approved, a simple table showing the results is output to chat, and the damage is applied to the respective targets as appropriate.  This massively simplifies combat, removing the need for players to do math or spam the chat by rolling individually, and the need to add bonuses 'on the fly' when the player's macro didn't include them automatically.  This feature is not yet fully implemented as I have not had time to work on this recently, but finishing it will be my next step.</p>
+    
+   	</div>
+   	
+   	<div class="row">
+		<h3 style="text-align:center;">Here's a GIF showing off most of the features</h3>
+        <img src="images/MaptoolExample.gif" class="centeredImage" style="padding-bottom:15px;">
+        <h4 style="text-align:center;">Ignore the map - that was from the campaign I made this on</h4>
+</div>
+   	
+   	<div class="row">
+		<hr><h2>Features</h2>
+		<hr></div>
+  	<div class="row"> 
+  	<ul>
+  		<li>Uses modular functions to work with any Pog without prior setup</li>
+  		<li>Prompts the user for input if data is missing</li>
+  		<li>Automatically detects if variables are not initialized and initializes them - this is a live environment so this is not normal for this 'language'</li>
+  		<li>Employs clever workarounds for the nesting limits such as building strings using multiple 'macros' (basically functions)</li>
+  		<li>Uses HTML and CSS to clearly and neatly display information</li>
+  		<li>Customizeable 'attacks' that allow automation of the pathfinder combat system</li>
+  		<li>Self-learning Resistances and Immunities - asks player for input if it does not know, but keeps record of all player inputs for future reference</li>
+  		<li>Prompts to edit or customize any data on the sheet</li>
+  		<li>Created for usability - knowing I could not predict everything in the Pathfinder game, I made sure players can add bonuses and detriments on the fly</li>
+  		<li>Very modular - created in such a way that it can apply to any token or pog without prior setup, making a GameMaster's job much easier for creating enemies since they do not need their own macros</li>
+  	</ul>
+   	
+   	</div>
+   	
+    
+    <hr>
+    <h2 class="topPadded">Challenges</h2>
+    <hr>
+    <div class="row">
+    	  	<ul>
+    		<li>Limited Language - The Maptool Macro scripting language is not meant for heavy usage; in order to run most scripts, you must manually increase your memory limit for MapTool via batch file, and nesting is limited to two levels.  I found ways to work around this, notably by referencing other macros when I've hit the nesting limit and using their output instead of nesting further.  I managed to link a CSS file using this, and create and store variables on the fly to relatively permanently store data.  The language's syntax is very demanding, requiring no leading spaces for example, and documentation is not very complete - I had to learn many nuances through trial and error.</li>
+    		<li>Actually that's pretty much it, the language is the only reason this is even notable.  Seriously though, this language is terrible and I'm amazed I managed to get it to do this.  In general most of the language doesn't seem to be made for live interaction - generally it's for either static display of non-changing variables or outputting directly to chat</li>
+    		<li>Oh, HTML, I guess - When I began this, I was very new to HTML.  I learned to create complex tables, legible formatting, and use CSS with this project.</li>
+    	</ul>
+    </div>
+    <br>
+    <hr>
+    <h2 class="topPadded">Source Code</h2>
+    <hr>
+    <div class="row">
+		<p><a href="https://github.com/Dimencia/D-s-Maptool-Character-Sheet-for-Pathfinder" target="_blank">GitHub</a>
+  	<br>
+   	Here is a snippet, the CombatHelperDialog.  Note that due to the language I cannot use leading spaces to indent and comments must be done in HTML
+    	<br>
+    	<br>
+    	<pre>
+    		<code>[h: callingToken = getImpersonated()]</code><code>[h: setProperty("lastSheetTab","CombatSheet@Lib:Test")]</code><code>[frame("CharSheetTest"): {</code><code>&lt;html></code><code>&lt;head></code><code>&lt;link rel="stylesheet" type="text/css" href="CharSheet_css@[r: getMacroLocation()]"></code><code>&lt;link rel='onChangeSelection' type='macro' href='[r:macroLinkText("changeTarget@Lib:Test")]'> </code><code>&lt;meta name="input" content="true"></code><code>&lt;title>Character Sheet&lt;/title></code><code>&lt;/head></code><code>&lt;body></code><code>&lt;table> &lt;!--Over-table to make sure everything is inline--></code><code>&lt;tr>&lt;td></code><code>&lt;table> &lt;!--Start Tabs table --></code><code>&lt;tr></code><code>&lt;td>[r:macroLink("Overview","CharSheet@Lib:Test")]&lt;/td></code><code>&lt;td>[r:macroLink("Attacks","AttacksSheet@Lib:Test")]&lt;/td></code><code>&lt;td border=1px>Combat Helper&lt;/td></code><code>&lt;/tr></code><code>&lt;/table> &lt;!-- End Tabs table --></code><code>&lt;/td>&lt;/tr></code><code>&lt;tr>&lt;td></code><code>[h: targets=getProperty("targets")]</code><code>&lt;table class="mainTables"> &lt;!-- Start target table --></code><code></code><code>&lt;tr>&lt;th colspan="[r: 1+listCount(targets)]" align="center" border=1>Targets&lt;/th>&lt;/tr></code><code>&lt;tr class="oddRow" align="center"></code><code>&lt;th>Name&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>[h: fontSize = 3]</code><code>[h: length=length(getName(listGet(targets,i)))]</code><code>[h: fontSize = if(length > 5,2,fontSize)]</code><code>[h: fontSize = if(length > 10,1,fontSize)]</code><code>&lt;td>&lt;font size="[r:fontSize]">[r:getName(listGet(targets,i))]&lt;/font>&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="evenRow" align="center"></code><code>&lt;td>&lt;/td></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>&lt;td align="center">&lt;img src="[r, token(listGet(targets,i)): getTokenImage(25)]" class="targetIcons">&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="oddRow" align="center"></code><code>&lt;th>Distance&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>[h: Distance = floor(getDistance(callingToken, 1, listGet(targets,i), "NO_GRID"))]</code><code></code><code>[h: Distance = Distance-(eval(getSize(listGet(targets,i)))*2)]</code><code>&lt;td>[r: Distance]&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="evenRow" align="center"></code><code>&lt;th>Resistances&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>&lt;td>[r: getProperty("Resistances",listGet(targets,i))]&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="oddRow" align="center"></code><code>&lt;th>Immunities&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>&lt;td>[r: getProperty("Immunities",listGet(targets,i))]&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="evenRow" align="center"></code><code>&lt;th>DR&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>&lt;td>[r: getProperty("DR",listGet(targets,i))]&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;tr class="oddRow" align="center"></code><code>&lt;th>AC&lt;/th></code><code>[for (i, 0, listCount(targets), 1, ""), code: {</code><code>&lt;td>[r: getProperty("AC",listGet(targets,i))]&lt;/td></code><code>}]</code><code>&lt;/tr></code><code>&lt;!-- And attacks on the same table --></code><code>&lt;tr>&lt;th colspan="[r: 1+listCount(targets)]" align="center" border=1>Attacks&lt;/th>&lt;/tr></code><code>[h: AttackNames = getProperty("AttackNames")]</code><code>[h: class = "oddRow"]</code><code>[for(i, 0, listCount(AttackNames), 1, ""), code: {</code><code>[h: propPrefix = "_"+listGet(AttackNames,i)+"_"]</code><code>&lt;tr class="[r:class]">&lt;th>[r:listGet(AttackNames,i)]&lt;/th></code><code>[h, macro("getCombatAttackString@Lib:Test"):listGet(AttackNames,i)]</code><code>[r:macro.return]</code><code>[h: class = if(class=="oddRow", "evenRow", "oddRow")]</code><code>&lt;/tr></code><code>}]</code><code></code><code>&lt;/table> &lt;!-- End Target table --></code><code>&lt;/td>&lt;/tr></code><code>&lt;/table></code><code>&lt;/body></code><code>&lt;/html></code><code>}]</code>
+    	</pre>
+    </div>
+    
+  </section>
+  <!-- Stats Gallery Section -->
+  
+  <!-- Parallax Section -->
+  
+  <!-- More Info Section -->
+  <footer> </footer>
+  <!-- Footer Section -->
+  
+  <!-- Copyrights Section -->
+  <div class="copyright">
+    &copy;2017&nbsp;
+  </div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>

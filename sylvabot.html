@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Beaver II</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/Scripts/styles/default.css">
+<script src="/Scripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header> 
+    <nav>
+      <ul>
+        <li><a href="http://Dimencia.com">HOME</a></li>
+        <li> <a href="mailto:Dimencia@gmail.com">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section --> 
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2 class="hidden">About</h2>
+    
+    <section class="hero" id="hero">
+      <h2 class="hero_header">Sylva <span class="light">Bot</span></h2>
+      <p class="tagline">A very interactive irc+ moderation bot</p>
+    </section>
+    
+    <hr>
+    <div class="shaded" style="padding-bottom: 10px;">This bot was created for a client, after which it was named, who streamed on Twitch - a rather popular video streaming platform.  Most of the chat interface for this platform is run on IRC, so most of the internals deal directly with it, but I based this upon an Open Source bot called <a href="http://coebot.tv">CoeBot</a>.  That means that all of the backend was already completed, but when Twitch updated their API, I ended up rewriting parts of it anyway.  
+    <p>The purpose of this bot was to promote and customize the twitch chat channel; CoeBot already provided all moderation functions for the most part, though I made many custom functions using those.  I updated it daily at first, then at least weekly based upon feedback from the client.  I proposed my own ideas, which he accepted or rejected, and I implemented anything he asked for.  This bot ran on the client's computer since it used graphic elements that he had to broadcast to his stream, i.e. the greenscreen.  There was time pressure on this project since we wanted to have the features usable immediately, so in some cases I had to create a temporary solution that was later fixed, such as the GameWisp authentication.  I had to log and back-up important information such as 'coins', a virtual currency that people took somewhat seriously, and provide resets and triggers that can be used in case something went wrong - as well as error detection and correction when loading/saving.
+    <p>The bot was capable of connecting to Twitch, Twitter, Discord, GameWisp, CleverBot, and even to my own webserver to obtain updates.  The client stopped streaming at some point, and development halted, but it is fully functional.
+    </p>
+   	</div>
+   	<div class="row">
+		<h3 style="text-align:center;">Here's a GIF showing the greenscreen in action for a 'follow train'</h3>
+        <img src="images/SylvaBotExample.gif" class="centeredImage" style="padding-bottom:15px;">
+        <h4 style="text-align:center;">This was generally small enough to put at the top of the screen on an overlay</h4>
+</div>
+    
+    <hr>
+    <h2 class="topPadded">Challenges</h2>
+    <hr>
+    <div class="row">
+    	  	<ul>
+    		<li>Twitch's API - This was a challenge mostly because during the time I was working on this, they updated their API extensively.  At some points my bot would not connect, or could not chat, and I had to dig through and eventually rewrote some of the the PircBot code, the bot that GeoBot is based on, which CoeBot is based on, which SylvaBot is based on. Whew.  At other times, it would create random crashes that I eventually was able to fix, but it took many versions of debugging to find the cause and adjust to fit Twitch's unannounced API changes.  And sometimes it wasn't the changes at all, but the API itself - when detecting a new follower or subscriber, the bot must load a page from the twitch API showing a full list.  This is no problem, but Twitch's server then caches that request for up to 5 minutes, resulting in delayed responses.  I eventually found a way around this by slightly changing the request size on each call to receive an un-cached page.</li>
+    		<li>Design Challenges - Once more I ran into a few design challenges; CoeBot was intended to be able to join a large number of channels at once, but this bot was only intended for one.  I initially rewrote some of CoeBot's functionality to enforce this, and refactored much of the connection procedure to reflect this.  Eventually it was requested to have the bot join another channel for a few minutes at a time and enter a line in chat.  Since I had already refactored all of this, I then had to work backwards and find a new way to get this to work - I ended up writing a separate function to jack into the CoeBot commands that I didn't refactor to accomplish this.</li>
+    		<li>Live Environment - The bot was always used in a live environment with dozens of users interacting with it.  All of its content was displayed on a stream or live chat, so any failures would be reflected live for all viewers to see.  I had to perform thorough testing to ensure there were no issues, and the users always seemed to find new ways to break things anyway.  I immediately resolved any bugs that appeared, and even created a system where I could remotely push an update in case of emergencies.  </li>
+    	</ul>
+    </div>
+    <br>
+    <hr>
+    <h2 class="topPadded">Source Code</h2>
+    <hr>
+    <div class="row">
+		<p><a href="https://github.com/Dimencia/SylvaBot" target="_blank">GitHub</a>
+  	<p> Also a changelog can be found <a href="https://docs.google.com/document/d/1w8AxEzEWJMqCRetdcZJjbl6xiYXiOrjjz7hmX7CQPWs/edit?usp=sharing" target="_blank">here</a>.  I did not use GitHub at the time of development and only uploaded it now</p>
+   	Here is a small snippet of a system I created to handle raffle-style giveaways to users in chat
+    	<br>
+    	<br>
+    	<pre>
+    		<code>// !raffle - Ops</code><code>		if ((msg[0].equalsIgnoreCase(prefix + "raffle") || msg[0].equalsIgnoreCase(prefix + "giveaway")) && isOp) {</code><code>			log("RB: Matched command !raffle");</code><code>			if ((msg.length == 1 || msg.length == 2) && (channelInfo.raffle == null || !raffleRunning)) {</code><code>				send(channel, "No giveaway in progress.  To start one, use " + prefix</code><code>						+ "giveaway start [Cost] [Sponsor] [Duration] [Description]");</code><code>			}</code><code>			if (msg.length >= 2) {</code><code>				if (msg[1].equalsIgnoreCase("start")) {</code><code>					if (msg.length < 5 || fuseArray(msg, 5).equals("")) {</code><code>						send(channel, "Invalid syntax.  " + prefix</code><code>								+ "giveaway start [Cost] [Sponsor] [Duration] [Description]");</code><code>						return;</code><code>					}</code><code>					if (raffleRunning) {</code><code>						send(channel,</code><code>								"Giveaway currently in progress.  Use " + prefix</code><code>										+ "giveaway end to stop without refunds or rolling a winner, " + prefix</code><code>										+ "giveaway reset, or " + prefix + "giveaway winner");</code><code>						return;</code><code>					}</code><code>					try {</code><code>						raffleCost = Integer.parseInt(msg[2]);</code><code>					} catch (Exception e) {</code><code>						send(channel, "Unable to use a cost of " + msg[2]);</code><code>						return;</code><code>					}</code><code>					raffleSponsor = msg[3];</code><code>					minutesToRunRaffle = 0;</code><code>					try {</code><code>						int minutes = Integer.parseInt(msg[4]);</code><code>						if (minutes > 0)</code><code>							minutesToRunRaffle = minutes;</code><code>						else</code><code>							throw new NumberFormatException();</code><code>					} catch (Exception e) {</code><code>						send(channel, "Invalid number of minutes to run: " + msg[4]</code><code>								+ ".  Enter a value of 0 if you want it to only end upon command");</code><code>						return;</code><code>					}</code><code>					if (minutesToRunRaffle == 0)</code><code>						minutesToRunRaffle = -1;</code><code>					raffleReward = fuseArray(msg, 5);</code><code>					String giveawayMessage = "A giveaway has started! Enter to win " + raffleReward + ", sponsored by "</code><code>							+ raffleSponsor + "!  " + "Type " + prefix + "giveaway to enter - entry fee is "</code><code>							+ raffleCost + " coins."</code><code>							+ (minutesToRunRaffle > -1 ? " This will run for " + minutesToRunRaffle + " minutes." : "");</code><code>					send(channel, giveawayMessage);</code><code>					discordBot.sendMessage(targetDiscordChannel,</code><code>							" A giveaway has started! Enter to win " + raffleReward + ", sponsored by "</code><code>									+ discordBot.getTwitchNameAsTag(raffleSponsor)</code><code>									+ "!  You must enter from the stream; go to https://www.twitch.tv/sylvacoin"</code><code>									+ " and type " + prefix + "giveaway to enter!  This costs " + raffleCost + " coins."</code><code>									+ (minutesToRunRaffle > -1 ? " You have " + minutesToRunRaffle + " minutes!" : ""),</code><code>							true);</code><code>					if (channelInfo.raffle == null) {</code><code>						channelInfo.raffle = new Raffle();</code><code>					}</code><code>					channelInfo.raffle.reset();</code><code>					channelInfo.raffle.setEnabled(true);</code><code>					raffleRunning = true;</code><code></code><code>					Channel tempChannel = channelInfo; // Necessary to avoid</code><code>														// issues with the</code><code>														// thread apparently...</code><code>					Runnable raffleSpammer = new Runnable() {</code><code></code><code>						@Override</code><code>						public void run() {</code><code>							int sleepTimer = 60000; // Run every minute but only</code><code>													// announce at the right</code><code>													// times.</code><code>							try {</code><code>								Thread.sleep(sleepTimer);</code><code>							} catch (InterruptedException e) {</code><code>								e.printStackTrace();</code><code>							}</code><code>							minutesToRunRaffle--;</code><code>							boolean sendMessage = false;</code><code>							if (minutesToRunRaffle >= 10 && minutesToRunRaffle % 10 == 0)</code><code>								sendMessage = true;</code><code>							if (minutesToRunRaffle < 10 && minutesToRunRaffle % 5 == 0)</code><code>								sendMessage = true;</code><code>							if (minutesToRunRaffle < 5)</code><code>								sendMessage = true; // Sends every 10 mins above</code><code>													// 10, 5 min warning, then</code><code>													// every minute.</code><code>							if (minutesToRunRaffle == 0) {</code><code>								endRaffle(tempChannel);</code><code>								return;</code><code>							}</code><code>							if (raffleRunning && sendMessage) {</code><code>								if (minutesToRunRaffle < 5)</code><code>									send(targetedChannel,</code><code>											"Last chance!  Type " + prefix + "giveaway for a chance to win "</code><code>													+ raffleReward + " at the cost of " + raffleCost + " coins! "</code><code>													+ minutesToRunRaffle + " minutes remain!");</code><code>								else</code><code>									send(targetedChannel,</code><code>											"A giveaway is in progress! Enter to win " + raffleReward</code><code>													+ ", sponsored by " + raffleSponsor + "!  " + "Type " + prefix</code><code>													+ "giveaway to enter - entry fee is " + raffleCost + " coins."</code><code>													+ (minutesToRunRaffle > -1</code><code>															? " You have " + minutesToRunRaffle + " minutes left!"</code><code>															: ""));</code><code></code><code>								// This is gross but whatever (targetedchannel)</code><code></code><code>							}</code><code>							Thread t = new Thread(this);</code><code></code><code>							if (raffleRunning)</code><code>								t.start();</code><code>						}</code><code></code><code>					};</code><code></code><code>					Thread t = new Thread(raffleSpammer);</code><code>					t.start();</code><code></code><code>					channelInfo.setCommand("giveaways",</code><code>							"A giveaway is in progress! Enter to win " + raffleReward + ", sponsored by "</code><code>									+ raffleSponsor + "!  " + "Type !giveaway to enter - entry fee is " + raffleCost</code><code>									+ " coins",</code><code>							this.botName, 2);</code><code>					return;</code><code>				} else if (msg[1].equalsIgnoreCase("cancel")) {</code><code>					if (channelInfo.raffle != null) {</code><code>						for (String s : channelInfo.raffle.entries) {</code><code>							int coins = currencyMap.get(s.toLowerCase());</code><code>							currencyMap.put(s.toLowerCase(), coins + raffleCost);</code><code>						}</code><code>						channelInfo.raffle.setEnabled(false);</code><code>						raffleRunning = false;</code><code>						channelInfo.raffleWinner = "";</code><code>						channelInfo.raffleWaitingForClaim = false;</code><code>					}</code><code></code><code>					send(channel, "Giveaway cancelled.  Refunded all entries.");</code><code>					return;</code><code>				} else if (msg[1].equalsIgnoreCase("reset")) {</code><code>					if (channelInfo.raffle != null) {</code><code>						for (String s : channelInfo.raffle.entries) {</code><code>							int coins = currencyMap.get(s.toLowerCase());</code><code>							currencyMap.put(s.toLowerCase(), coins + raffleCost);</code><code>						}</code><code>						channelInfo.raffle.reset();</code><code>						raffleRunning = false;</code><code>						channelInfo.raffleWinner = "";</code><code>						channelInfo.raffleWaitingForClaim = false;</code><code>					}</code><code></code><code>					send(channel, "Giveaway entries cleared.  Refunded all entries.");</code><code>					return;</code><code>				} else if (msg[1].equalsIgnoreCase("count")) {</code><code>					if (channelInfo.raffle != null) {</code><code>						send(channel, "Giveaway has " + channelInfo.raffle.count() + " entries.");</code><code>					} else {</code><code>						send(channel, "Giveaway has 0 entries.");</code><code>					}</code><code>					return;</code><code>				} else if (msg[1].equalsIgnoreCase("winner") || msg[1].equalsIgnoreCase("stop")</code><code>						|| msg[1].equalsIgnoreCase("reroll")) {</code><code>					endRaffle(channelInfo);</code><code>					return;</code><code>				} else if (msg[1].equalsIgnoreCase("end")) {</code><code>					send(channel,</code><code>							"Giveaway ended.  No refunds processed.  If you wish to refund, do " + prefix</code><code>									+ "giveaway reset (or cancel).  If you wish to roll a winner do " + prefix</code><code>									+ "giveaway winner (or reroll)");</code><code>					raffleRunning = false;</code><code>					channelInfo.raffleWaitingForClaim = false;</code><code>				}</code><code>			} else {</code><code>				if (channelInfo.raffle != null && raffleRunning) { // Make</code><code>																// sure</code><code>																// this</code><code>																// is</code><code>																// running...</code><code>					channelInfo.raffle.enter(sender);</code><code>				}</code><code>			}</code><code>			return;</code><code>		}</code>
+    	</pre>
+    </div>
+    
+  </section>
+  <!-- Stats Gallery Section -->
+  
+  <!-- Parallax Section -->
+  
+  <!-- More Info Section -->
+  <footer> </footer>
+  <!-- Footer Section -->
+  
+  <!-- Copyrights Section -->
+  <div class="copyright">
+    &copy;2017&nbsp;
+  </div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Beaver II</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/Scripts/styles/default.css">
+<script src="/Scripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header> 
+    <nav>
+      <ul>
+        <li><a href="http://Dimencia.com">HOME</a></li>
+        <li> <a href="mailto:Dimencia@gmail.com">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section --> 
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2 class="hidden">About</h2>
+    
+    <section class="hero" id="hero">
+      <h2 class="hero_header">Support Center <span class="light">3</span></h2>
+      <p class="tagline">(Unofficial Name)</p>
+    </section>
+    
+    <hr>
+    <div class="shaded" style="padding-bottom: 10px;">I created this application at my previous job due to issues I was having with our system.  I was not given database access, and used Javascript to simulate a login and parse all data on the server.  This was then stored in a text file; I was not using SQL at the time, and it is all loaded actively into memory.  For a 'database' of this size, it caused no problems, and was very fast.  I also included a few features that were not in the original interface, such as automatically running pings on a hotel's equipment when a site is opened.
+   	</div>
+   	<div class="row">
+		<h3 style="text-align:center;">Here's a GIF showing most of the features on a test site</h3>
+        <img src="images/Sc3ExampleFull.gif" class="centeredImage" style="padding-bottom:15px;">
+</div>
+    
+    <hr>
+    <h2 class="topPadded">Challenges</h2>
+    <hr>
+    <div class="row">
+    	I ran into quite a few interesting challenges while creating this; here are a few of them and how I solved them<br>
+    	<ul>
+    		<li>No database access - without access to the database, I had to create my own, basically.  I used javascript to login to our system through a virtual browser.  I then found that if I disable javascript on this 'browser', I could view the entire property list on one page.  I used this to get phone numbers (a unique identifier).  Once I had this list, I could run searches through our old system using this list and save data from each entry.  I stored all of this in objects, and once it was finished I serialized them all and saved to a text file.  The process took many hours to run initially.</li>
+    		<li>Potentially outdated information - Once I had this records file, upon startup if the file was detected, it did not parse the entire database again since it takes so long.  In order to make sure information was updated, each time a page is loaded in the software it reaches out to the original system and tries to open the page to update the record.  Once it has reached the page it refreshes the software view and shows the new information.  If this is used regularly, the changes will generally be minor or obvious, and the initial information is displayed until the page is updated - this means the technicians can begin troubleshooting immediately even if there were minor changes to the system.  Also, if the changes were major, generally the old information will all show offline and it will be clear that updates are pending - and generally within 5-10 seconds the page would refresh and show the new information</li>
+    		<li>Too much information - During the parsing process, I only took the basic and most important information from each site, but I did not gather Tickets, because each site has hundreds and this would have been too much to parse.  As you can see in the GIF, it takes quite a while to load tickets - this is indicative of the speed of the legacy system.  When a site loads in my software, it attempts to load information from the legacy site from the list of tickets for the property.  When a specific ticket is expanded, it then tries to load that specific ticket.  Loading all of this information without it being requested would be inefficient, but unfortunately this means there is still a delay when trying to view a ticket.  This was necessary because there is no way to view ticket details for more than one ticket at a time in the legacy system
+    		</li>
+    		<li>Pinging - You can see in the GIF I have pings to Google, ToS (the employer's terms of service page), and in the bottom left Modem and GW.  These were very difficult to implement because pinging is generally OS-specific, and Java by definition is not.  This means the program only works properly on Windows, at the moment</li>
+    		<li>Multithreading - This was a challenge because so many things are loaded when a property is opened, they had to be multithreaded.  Additionally, when a property is loaded it checks the status of all equipment, which also had to be multithreaded.  I had to refactor the program at one point to ensure all multithreaded instances can be run synchronously without any issues.  I could not multi-thread the initial parsing process, however, because this would require multiple simultaneous logins to the legacy system which it did not allow</li>
+    		<li>Layout - Java is special, and its layouts are ... not very fun.  I still did not end up with it looking exactly how I wanted, but it scales well with window sizing and the GUI was basically 'good enough' for me at the time.  This was developed in 2014 and I now have higher standards for front-end design</li>
+    		<li>Auto-generated legacy system - Probably the toughest challenge was finding ways to reference the fields I needed from the legacy system, because it was auto-generated.  This means sometimes the field I wanted had a random text string as a class, name, or ID - or sometimes it was arbitrary, like with tickets.  I had to put a lot of effort into workarounds for many of these, or ways to detect the information without knowing the element it is in, particularly with tickets</li>
+    		<li>Bugs - But not just mine.  In the legacy software there were many unpredictable bugs that would sometimes cause accessing a page to fail repeatedly for a period of time.  This is why I included a metric to show successes vs attempts; I found a way of accessing the pages that was reliable using this along with some retry attempts.</li>
+    		<li>Poor Design - Yes, this time mine.  I initially displayed responses by printing to console, not realizing that an actual user would expect the text to output in the 'window' for the software.  I found a way to hook the system.out stream and write a custom display function for it instead of replacing all instances where I'd used it</li>
+    	</ul>
+    </div>
+    <br>
+    <hr>
+    <h2 class="topPadded">Source Code</h2>
+    <hr>
+    <div class="row">
+    	I cannot include full source code because there is sensitive information contained within it, and to respect the NDA I signed in this position.  I have included a small snippet to show an example, however.  Please keep in mind this was developed in 2014 and does not necessarily reflect upon the code I would write today
+    	<br>
+    	<br>
+    	<pre><code>private static void parseAllOfSC() {</code><code>		// Intended to be run in main instead of other things, takes too long to</code><code>		// run every time</code><code>		if (!scLogin()) {</code><code>			System.out.println("Total failure - cannot login");</code><code>			return;</code><code>		}</code><code>		System.out.println("Logged in, beginning parse.");</code><code></code><code>		if (!initializeAllProperties()) {</code><code>			System.out.println("Could not initalize properties");</code><code>			return;</code><code>		}</code><code>		System.out.println(</code><code>				"Succesfully initialized " + allProperties.keySet().size() + " properties, beginning searches");</code><code></code><code>		mainDriver = new MyHtmlUnitDriver(true);</code><code></code><code>		if (!scLogin()) {</code><code>			System.out.println("Failed to login the second time");</code><code>			return;</code><code>		}</code><code></code><code>		int successes = 0;</code><code>		int attempts = 0;</code><code>		// Iterate through each key and load the property, record trues as +1,</code><code>		// then show total complete vs total</code><code>		// Remember not all properties have equipment tho</code><code>		// We can't multi-thread without logging in a bunch more times, so this</code><code>		// is gonna be slow.</code><code></code><code>		for (String phone : allProperties.keySet()) {</code><code>			attempts++;</code><code>			if (loadPropertyByPhone(phone))</code><code>				successes++;</code><code></code><code>			System.out.println(attempts + "/" + allProperties.keySet().size());</code><code>		}</code><code>		writeAllProperties("currentProperties.txt");</code><code>		System.out.println("Successfully written! " + successes + "/" + attempts + " successful");</code><code>	}</code></pre>
+    </div>
+    
+  </section>
+  <!-- Stats Gallery Section -->
+  
+  <!-- Parallax Section -->
+  
+  <!-- More Info Section -->
+  <footer> </footer>
+  <!-- Footer Section -->
+  
+  <!-- Copyrights Section -->
+  <div class="copyright">
+    &copy;2017&nbsp;
+  </div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>

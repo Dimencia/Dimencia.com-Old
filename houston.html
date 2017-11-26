@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Beaver II</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/Scripts/styles/default.css">
+<script src="/Scripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Unity Projects.json", {onProgress: UnityProgress});
+    </script>
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header> 
+    <nav>
+      <ul>
+        <li><a href="http://Dimencia.com">HOME</a></li>
+        <li> <a href="mailto:Dimencia@gmail.com">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section --> 
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2 class="hidden">About</h2>
+    
+    <section class="hero" id="hero">
+      <h2 class="hero_header">Houston<span class="light"></span></h2>
+      <p class="tagline">Why did we bring bees on this ship?</p>
+    </section>
+    
+    <hr>
+    <div class="shaded" style="padding-bottom: 10px;">This is a game in-progress (not yet finished) I am working on in Unity.  The idea is that one player is in the cockpit of a rocket with minimal instrumentation, and must be given commands from another player who only sees the inside of their command center.  This is based loosely on the game <i>Keep Talking and Nobody Explodes</i>, where the goal is a mix of humor and a sense of accomplishment and teamwork when the players are successful.  
+    <p>I am not an artist of any sort, so all models and skins should be considered WIP - basically all of them are placeholders.</p>
+    <p>This is my first major project involving C#, though the language structure is very similar to Java, my strongest language.  I once also attempted to write a VR chess game using C#, which was mildly successful, but I did not finish and moved on to other things before writing much of anything.</p>
+    <p>While I intended the game to be more silly, I got caught up in physics simulation and accidentally made an accurate simulation of a Saturn V rocket, including air resistance based on atmospheric pressure.  I am still unsure if I will continue with this model or create a less simulated model</p>
+    <p>Most of my ideas for multiplayer interaction are not yet implemented, and neither is the multiplayer itself or any of the Control Center.  This is a very early project but already utilizes some complex concepts.</p>
+    
+   	</div>
+   	<div class="row">
+		<hr><h2>Features</h2>
+		<hr></div>
+  	<div class="row"> 
+  	<ul>
+  		<li>Realistic physics simulation for a Saturn V Rocket</li>
+  		<li>Includes air resistance, weight loss due to fuel, gravity based upon distance to the planet</li>
+  		<li>Randomized player-blind buttons - the operator is meant to relay the purpose of each button</li>
+  		<li>Minor 'punishments' for pressing these buttons without direction, such as a 'jettison' button</li>
+  		<li>Launch button will toggle rockets on or off</li>
+  		<li>Full player control of rocket facing and rotation using QEWASD</li>
+  		<li>Custom edited sky filter to display stars upon gaining atmospheric height</li>
+  		<li>Ability to roam the cabin by using 'F' to exit piloting mode.  Click the stick to pilot once more</li>
+  		<li>Gravity applied on a roaming player based upon G forces on the craft and planetary gravity</li>
+  		<li>'Fake' ship - The player is inside a static model that displays the view of the moving model to reduce complications</li>
+  		<li>Minor tree and terrain generation near launch site</li>
+  		<li>Full-scale Earth and atmospheric model</li>
+  	</ul>
+  	<h5>Known Bugs</h5>
+  	<ul>
+  		<li>Looking straight up or down can cause view problems</li>
+  		<li>Rocket sounds do not end when thrusters cut</li>
+  		<li>Resizing the game window causes the reticle to become offset from the center</li>
+  		<li>Some textures or materials do not export properly when building with Unity</li>
+  		<li>Unity WebPlayer sometimes offsets the game content slightly from the frame</li>
+  		<li>Render issues at high altitudes due to precision problems</li>
+  	</ul>
+   	
+   	</div>
+   	<div class="row">
+		
+        <h5><p>NOTE: Before playing the demo, I want to mention again this is a very early WIP project.  There are bugs, particularly with the camera losing orientation when looking straight up or down, or rocket sounds not cutting out when thrust cuts, and many features do not work.  The planet is a very low polygon very large sphere, and currently there are precision issues at long distances due to the sizes I am using (that is, the Earth is to-scale).  There is no reset or exit option; refreshing the page should be sufficient</p></h5>
+        <br>
+        <h3 style="text-align:center;"><a href="/HoustonGame" style="color:#aaa" target="_parent">Click to play the entire game so far</a></h3>
+        <h4 style="text-align:center;">Uses Unity's WebGL player</h4>
+        
+</div>
+    
+    <hr>
+    <h2 class="topPadded">Challenges</h2>
+    <hr>
+    <div class="row">
+    	  	<ul>
+    		<li>Learning Unity - I had never used Unity before and basically everything I scripted involved using Unity's functions.  I was able to use the docs and various examples to accomplish everything I needed</li>
+    		<li>Making Stars - I used an open source package to generate the stars, but they showed by default.  I had to edit the material itself to make a gradient based upon my altitude variable and make them appear slowly as you gain altitude</li>
+    		<li>Physics Problems - Unity has weird rules for parents and how they affect child movement; there was no effective way for me to simulate gravity on the rocket and also the player inside while both are moving.  I instead cloned the ship to a static model and put the player in this, and made sure the window showed output from the moving model, and used G-Forces from the moving model to apply to the player when they are not in the pilot's seat</li>
+    		<li>Licensing - I had to be very careful about any models, skins, sounds, and other assets I used to ensure they were licensed in a way that I could redistribute them with the game.  </li>
+    		<li>Standardization - I started this project to learn C#, but now that I have a grasp on it my next goal is to standardize the way I use functions, variable names, comment blocks, etc</li>
+    	</ul>
+    </div>
+    <br>
+    <hr>
+    <h2 class="topPadded">Source Code</h2>
+    <hr>
+    <div class="row">
+		<p><a href="https://github.com/Dimencia/Houston" target="_blank">GitHub</a>
+  	<br>
+   	Here is a snippet of some of the beefier functions, meant to be run at a fixed rate once per tick
+    	<br>
+    	<br>
+    	<pre>
+    		<code>private void CalculateAccelerations()</code><code>    {</code><code>        // Here, we will calculate thrust acceleration if accelerating, and also drag force</code><code>        // We can add each of these up into its own vector before applying them to reduce load on physics engine (not that it matters)</code><code>        // But we can then use this to calculate G's on the pilot</code><code>        // This function should be called on fixedUpdate() and will make use of Time.deltaTime</code><code>        // We will not apply any forces here, that's in applyAccelerationsOnRocket using values this function set</code><code></code><code>        // I'd like to move everything that was set to repeating things to go here instead</code><code>        // DrainFuel, CameraShake, ApplyDrag, apply g forces to player if unrestrained, and collision correction if necessary</code><code></code><code>        // We will need to set these variables from the class:</code><code>        // Vector3 forceToApplyOnRocket;</code><code>        // Vector3 dragForce;</code><code>        // Vector3 thrustForce; // Just for documentation/debugging</code><code>        // Vector3 gravityForceOnPlayer;</code><code>        // Vector3 gravityVector;</code><code>        // float rocketNewMass;</code><code>        // Need to set fuel, but too lazy to make fuel system, so that means setting mass</code><code></code><code>        // Thrust</code><code>        if (accelerating)</code><code>        {</code><code>            thrustForce = (transform.up * accel);</code><code>            //Debug.Log("Adding acceleration force in " + transform.up + " direction of " + accel + "N");</code><code>            //playerCollider.transform.localPosition = new Vector3(playerCollider.transform.localPosition.x, lastPlayerLocalY, playerCollider.transform.localPosition.z);</code><code></code><code>            // And Fuel Drain</code><code></code><code>            rocketNewMass = rb.mass - fuelDrainRate * Time.deltaTime;</code><code>        }</code><code>        else</code><code>            thrustForce = Vector3.zero; // If not thrusting... don't thrust.</code><code></code><code>        if(drainingFuel)</code><code>        {</code><code>            rocketNewMass = rb.mass - fuelDrainRate * Time.deltaTime * 2; // Just double</code><code>        }</code><code></code><code>        // Drag</code><code>        if(jettisonTimer > 0)</code><code>        {</code><code>            // Putting this here should ensure there's time to clip through the roof before I re-enable collisions</code><code>            jettisonTimer--;</code><code>            if (jettisonTimer == 0)</code><code>            {</code><code>                playerCollider.isTrigger = false;</code><code>            }</code><code>        }</code><code></code><code>        float atmosphericPressure = pressureAtSeaLevel * Mathf.Pow((float)System.Math.E, (float)(-altitude) / atmosphericHeight);</code><code>        double dragMagnitude = System.Math.Round((0.004892f * atmosphericPressure * rb.velocity.sqrMagnitude * dragCoefficient * rb.mass) * Time.deltaTime, 2);</code><code>        if(altitude > atmosphericHeight)</code><code>        {</code><code>            dragMagnitude = 0;</code><code>        }</code><code></code><code>        Vector3 dragDirection = Vector3.zero;</code><code>        //if (rb.velocity.sqrMagnitude > 2500) // > 50m/s</code><code>            dragDirection = -rb.velocity.normalized;</code><code>        //else</code><code>            //dragDirection = Vector3.zero; // No drag if below 50m/s in any situation to prevent weird issues with direction on velocity</code><code></code><code>        dragForce = (dragDirection * (float)dragMagnitude);</code><code>        //Debug.Log(dragForce + "drag force vector, Pressure: " + atmosphericPressure);</code><code>        // Now update gravity by distance</code><code>        // F = -9.8*((rocket.mass*earth.mass)/math.pow(altitude,2)</code><code>        // Because earth mass is way too big, so we use a decimal datatype which is 20x slower...</code><code></code><code>        // Altitude + earthRadius = R, x/R^2 where x is our gravitational constant, then -9.8*(x/R^2)</code><code>        // Or about 6000000 = R, </code><code></code><code>        decimal bigGCoefficient = 3.6e13m;</code><code>        gravityForce = (float)(-9.8m * decimal.Round(bigGCoefficient / decimal.Round((decimal)Mathf.Pow(altitude + (earth.GetComponent<SphereCollider>().radius * earth.transform.localScale.y), 2))));</code><code>        //Debug.Log(gravityForce + "m/s^2 of Gravity");</code><code></code><code>        gravityVector = (transform.position - earth.transform.position).normalized * gravityForce; // Uses unity physics so we don't need deltaTime</code><code></code><code>        // We now have what we need to set up the forceToApplyOnRocket, doesn't include gravity, that's handled by Physics</code><code>        //Debug.Log(thrustForce + " + " + dragForce);</code><code>        forceToApplyOnRocket = dragForce + thrustForce; // Deltatime will need to apply, but not until we apply settings, we need this for calculations</code><code></code><code>        //Debug.Log("Total rocket force: " + forceToApplyOnRocket);</code><code></code><code>        // And the hard part, G's on the player</code><code>        // Which is no longer hard, it's the normal of the rocketforce/rocketmass (F=ma, divide out rocket mass and add player mass which is effectively 1)</code><code>        gravityForceOnPlayer = (-forceToApplyOnRocket / rocketNewMass); // I think we can apply this as an impulse with deltaTime</code><code>        //Debug.Log("Gravity on player = " + gravityForceOnPlayer);</code><code>        // If the rocket is stationary or on the ground, add gravityVector</code><code>        if(rb.velocity.sqrMagnitude < 1)</code><code>        {</code><code>            //Debug.Log(rb.velocity + " is velocity sqrmagnitude < 1, adding player grav");</code><code>            gravityForceOnPlayer += gravityVector;</code><code>        }</code><code></code><code>        gForces = (gravityForceOnPlayer.magnitude / 9.8f)*-Math.Sign(gravityForceOnPlayer.y); // The sign is relative to the global Y axis of this vector</code><code>        gForceText.text = System.Math.Round(gForces,2) + " g's";</code><code></code><code>        // I don't think these are used, but good for debugging</code><code></code><code>        lastVelocity = totalVel;</code><code>        lastPosition = rb.transform.position;</code><code>        startup = false;</code><code></code><code>        // Camera shake</code><code>        if (gForces >= 1.2)</code><code>        {</code><code>            Camera.main.SendMessage("Shake", new Vector3((float)(Time.deltaTime* 4 * (gForces / 6)), (float)(Time.deltaTime / 50 * (gForces / 6)), (float)((Time.deltaTime * 10 - (gForces / 6)) / 5)));</code><code>            // Intensity, duration, delay</code><code>            // Very customized with numbers that make it look good ... no relation to secondsBetweenCalculations at first...</code><code>            // Had to force a relation by shoving it into each one</code><code>        }</code><code></code><code></code><code>    }</code><code></code><code>    private void ApplyAccelerations()</code><code>    {</code><code>        // This should be very simple assuming calculate was run first</code><code>        // We will need to use these variables from the class:</code><code>        // Vector3 forceToApplyOnRocket;</code><code>        // Vector3 gravityForceOnPlayer;</code><code>        // Vector3 gravityVector;</code><code>        // float rocketNewMass;</code><code>        // Need to set fuel, but too lazy to make fuel system, so that means setting mass</code><code></code><code>        // Adjust mass and fuelbar</code><code>        rb.mass = rocketNewMass;</code><code>        int fuelBarHeight = (int)(((rb.mass - minimumMass) / startingMass) * 100);</code><code>        fuelBar.rectTransform.sizeDelta = new Vector2(100, fuelBarHeight);</code><code>        if (rb.mass < minimumMass)</code><code>        {</code><code>            accelerating = false;</code><code>        }</code><code></code><code>        // Set Physics gravity</code><code>        Physics.gravity = gravityVector;</code><code></code><code>        // Apply forces on rocket</code><code>        rb.AddForce(forceToApplyOnRocket * Time.deltaTime,ForceMode.Impulse);</code><code></code><code>        // Apply on player if necessary</code><code>        if (!controllingRocket && !playerCollider.GetComponent<PlayerControls>().Grounded)</code><code>        {</code><code>            playerCollider.GetComponent<Rigidbody>().AddForce(gravityForceOnPlayer * Time.deltaTime,ForceMode.Impulse);</code><code>        }</code><code></code><code></code><code>    }</code>
+    	</pre>
+    </div>
+    
+  </section>
+  <!-- Stats Gallery Section -->
+  
+  <!-- Parallax Section -->
+  
+  <!-- More Info Section -->
+  <footer> </footer>
+  <!-- Footer Section -->
+  
+  <!-- Copyrights Section -->
+  <div class="copyright">
+    &copy;2017&nbsp;
+  </div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>
